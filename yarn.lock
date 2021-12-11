@@ -689,7 +689,7 @@ extglob@^0.3.1:
   dependencies:
     is-extglob "^1.0.0"
 
-farrow-api@^1.10.8:
+farrow-api@^1.10.9:
   version "1.11.0"
   resolved "https://registry.yarnpkg.com/farrow-api/-/farrow-api-1.11.0.tgz#e1f43afc718132b24417b7fbc830a055b2434af1"
   integrity sha512-LopqWyB5HzP6WC6cDjXFPqWrORCVTdO1FAoMEEALTmea8qfNd5fbJQjjUHe8y3lXoom5ggb1TRLx4CwMszCS2g==
@@ -700,24 +700,24 @@ farrow-api@^1.10.8:
     prettier "^2.4.1"
     tslib "^2.1.0"
 
-farrow-faas-cli@^0.1.12:
-  version "0.1.12"
-  resolved "https://registry.yarnpkg.com/farrow-faas-cli/-/farrow-faas-cli-0.1.12.tgz#e348633f128114c07a48df4aec9c279f3c0becf7"
-  integrity sha512-gB8cGvLNL5Ub39t9G4UKKFnN2P5+Q9RNx4AbwZ7qWUNI7YhqsDnqSifNZMqk1IUV1xv/zTqY+cl2/OPInU0vvw==
+farrow-faas-cli@^0.1.14:
+  version "0.1.14"
+  resolved "https://registry.yarnpkg.com/farrow-faas-cli/-/farrow-faas-cli-0.1.14.tgz#a44efd0b92a796b4f5e81c02c93b5cd232fdb864"
+  integrity sha512-i1jvv7vvo471pnqiMO17R6BVm4QRzkK3mzZzwmE+sHPfT/7aG+HlRWrA133Utgk/RjsXaE0HARsyKWTGcI0/jA==
   dependencies:
     chalk "^4.1.2"
     commander "^8.0.0"
     esbuild "^0.12.15"
-    farrow-faas "^0.1.12"
+    farrow-faas "^0.1.13"
     globby "^11.0.4"
     leven "^3.1.0"
     ts-node "^10.2.1"
     tslib "^2.1.0"
 
-farrow-faas@^0.1.12:
-  version "0.1.12"
-  resolved "https://registry.yarnpkg.com/farrow-faas/-/farrow-faas-0.1.12.tgz#4ddca454e10e5f852594be81a91fbf1f2119a90a"
-  integrity sha512-sBv2dd+gvMkuU3ftOptM9pGl7CnzRinJzJXCJJPgS6W4RW1jwoPuC8/FIz2HQHzBGAd46hbYYo+3rjB3kBq+/g==
+farrow-faas@^0.1.13:
+  version "0.1.13"
+  resolved "https://registry.yarnpkg.com/farrow-faas/-/farrow-faas-0.1.13.tgz#cfc92a9d6ffa1888e2992598281c825250993cd3"
+  integrity sha512-irz6fQk+PvuEvz6V5FGNJPxUxP2vZKQX6Opm3WFmfqS7mumzXOBzktRk3AhaQ+0q4yaeE2ufGy5RYg0uZXTzdA==
   dependencies:
     "@types/bytes" "^3.1.1"
     "@types/co-body" "^5.1.1"
@@ -725,7 +725,7 @@ farrow-faas@^0.1.12:
     "@types/media-typer" "^1.1.1"
     "@types/raw-body" "^2.3.0"
     bytes "^3.1.0"
-    farrow-api "^1.10.8"
+    farrow-api "^1.10.9"
     farrow-pipeline "^1.10.6"
     farrow-schema "^1.10.8"
     inflation "^2.0.0"

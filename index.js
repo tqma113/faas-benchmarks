@@ -5072,10 +5072,10 @@ var require_logger = __commonJS({
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.prettyTime = exports2.prettyNumber = exports2.defaultPrettyNumberOptions = exports2.createLogger = void 0;
     var tslib_1 = require_tslib();
-    var util_1 = tslib_1.__importDefault(require("util"));
-    var bytes_1 = tslib_1.__importDefault(require_bytes());
+    var util_1 = (0, tslib_1.__importDefault)(require("util"));
+    var bytes_1 = (0, tslib_1.__importDefault)(require_bytes());
     var createLogger = function(options) {
-      var config = tslib_1.__assign({ transporter: function(str) {
+      var config = (0, tslib_1.__assign)({ transporter: function(str) {
         return console.log(str);
       } }, options);
       var transporter = config.transporter;
@@ -5084,16 +5084,16 @@ var require_logger = __commonJS({
         for (var _i = 1; _i < arguments.length; _i++) {
           args2[_i - 1] = arguments[_i];
         }
-        var string = util_1.default.format.apply(util_1.default, tslib_1.__spreadArray([format], tslib_1.__read(args2)));
+        var string = util_1.default.format.apply(util_1.default, (0, tslib_1.__spreadArray)([format], (0, tslib_1.__read)(args2), false));
         transporter(string);
       };
       var logInput = function(method, url) {
         print("  <-- %s %s", method, url);
       };
       var logOutput = function(method, url, status, startTime, contentLength, event) {
-        var length = [204, 205, 304].includes(status) ? "" : contentLength ? bytes_1.default(contentLength) : "-";
+        var length = [204, 205, 304].includes(status) ? "" : contentLength ? (0, bytes_1.default)(contentLength) : "-";
         var upstream = event === "error" ? "xxx" : event === "close" ? "-x-" : "-->";
-        print("  " + upstream + " %s %s %s %s", method, url, status, exports2.prettyTime(startTime), length);
+        print("  " + upstream + " %s %s %s %s", method, url, status, (0, exports2.prettyTime)(startTime), length);
       };
       return {
         print,
@@ -5107,16 +5107,16 @@ var require_logger = __commonJS({
       separator: "."
     };
     var prettyNumber = function(number, options) {
-      var config = tslib_1.__assign(tslib_1.__assign({}, exports2.defaultPrettyNumberOptions), options);
+      var config = (0, tslib_1.__assign)((0, tslib_1.__assign)({}, exports2.defaultPrettyNumberOptions), options);
       var delimiter = config.delimiter, separator = config.separator;
-      var _a = tslib_1.__read(number.toString().split(".")), first = _a[0], rest = _a.slice(1);
+      var _a = (0, tslib_1.__read)(number.toString().split(".")), first = _a[0], rest = _a.slice(1);
       var text = first.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1" + delimiter);
-      return tslib_1.__spreadArray([text], tslib_1.__read(rest)).join(separator);
+      return (0, tslib_1.__spreadArray)([text], (0, tslib_1.__read)(rest), false).join(separator);
     };
     exports2.prettyNumber = prettyNumber;
     var prettyTime = function(start) {
       var delta = Date.now() - start;
-      return exports2.prettyNumber(delta < 1e4 ? delta + "ms" : Math.round(delta / 1e3) + "s");
+      return (0, exports2.prettyNumber)(delta < 1e4 ? delta + "ms" : Math.round(delta / 1e3) + "s");
     };
     exports2.prettyTime = prettyTime;
   }
@@ -5131,21 +5131,21 @@ var require_server = __commonJS({
     exports2.parseBody = exports2.isJsonType = exports2.handleBasenames = exports2.getBody = exports2.getContentLength = exports2.createHttpServer = void 0;
     var tslib_1 = require_tslib();
     var http_1 = require("http");
-    var inflation_1 = tslib_1.__importDefault(require_inflation());
-    var raw_body_1 = tslib_1.__importDefault(require_raw_body());
-    var media_typer_1 = tslib_1.__importDefault(require_media_typer());
+    var inflation_1 = (0, tslib_1.__importDefault)(require_inflation());
+    var raw_body_1 = (0, tslib_1.__importDefault)(require_raw_body());
+    var media_typer_1 = (0, tslib_1.__importDefault)(require_media_typer());
     var logger_1 = require_logger();
     var createHttpServer = function(handleRequest, options) {
       var isNotProduction = process.env.NODE_ENV !== "production";
-      var config = tslib_1.__assign({ logger: isNotProduction }, options);
+      var config = (0, tslib_1.__assign)({ logger: isNotProduction }, options);
       var loggerOptions = !config.logger || typeof config.logger === "boolean" ? {} : config.logger;
-      var logger = config.logger ? logger_1.createLogger(loggerOptions) : null;
+      var logger = config.logger ? (0, logger_1.createLogger)(loggerOptions) : null;
       var handle = function(req, res) {
-        return tslib_1.__awaiter(void 0, void 0, void 0, function() {
+        return (0, tslib_1.__awaiter)(void 0, void 0, void 0, function() {
           var startTime_1, method_1, url_1, contentLength_1, hasLogOut_1, logOutput_1, json, content, length, error_1, message2;
-          var _a, _b, _c, _d;
-          return tslib_1.__generator(this, function(_e) {
-            switch (_e.label) {
+          var _a, _b;
+          return (0, tslib_1.__generator)(this, function(_c) {
+            switch (_c.label) {
               case 0:
                 if (logger) {
                   startTime_1 = Date.now();
@@ -5157,7 +5157,7 @@ var require_server = __commonJS({
                     if (hasLogOut_1)
                       return;
                     hasLogOut_1 = true;
-                    logger === null || logger === void 0 ? void 0 : logger.logOutput(method_1, url_1, res.statusCode, startTime_1, contentLength_1 || exports2.getContentLength(res), event);
+                    logger === null || logger === void 0 ? void 0 : logger.logOutput(method_1, url_1, res.statusCode, startTime_1, contentLength_1 || (0, exports2.getContentLength)(res), event);
                   };
                   logger.logInput(method_1, url_1);
                   res.once("close", function() {
@@ -5175,12 +5175,12 @@ var require_server = __commonJS({
                     });
                   });
                 }
-                _e.label = 1;
+                _c.label = 1;
               case 1:
-                _e.trys.push([1, 3, , 4]);
+                _c.trys.push([1, 3, , 4]);
                 return [4, handleRequest(req, res)];
               case 2:
-                json = _e.sent();
+                json = _c.sent();
                 content = JSON.stringify(json);
                 length = Buffer.byteLength(content);
                 res.setHeader("Content-Type", "application/json");
@@ -5188,10 +5188,10 @@ var require_server = __commonJS({
                 res.end(content);
                 return [3, 4];
               case 3:
-                error_1 = _e.sent();
-                message2 = (_c = error_1 === null || error_1 === void 0 ? void 0 : error_1.stack) !== null && _c !== void 0 ? _c : "";
+                error_1 = _c.sent();
+                message2 = error_1 instanceof Error ? (error_1 === null || error_1 === void 0 ? void 0 : error_1.stack) || "" : "";
                 if (!res.headersSent) {
-                  res.statusCode = (_d = error_1.statusCode) !== null && _d !== void 0 ? _d : 500;
+                  res.statusCode = error_1 instanceof Error ? error_1.statusCode : 500;
                   res.setHeader("Content-Type", "text/plain");
                   res.setHeader("Content-Length", Buffer.byteLength(message2));
                 }
@@ -5205,7 +5205,7 @@ var require_server = __commonJS({
           });
         });
       };
-      return http_1.createServer(handle);
+      return (0, http_1.createServer)(handle);
     };
     exports2.createHttpServer = createHttpServer;
     var getContentLength = function(res) {
@@ -5221,15 +5221,15 @@ var require_server = __commonJS({
     };
     exports2.getContentLength = getContentLength;
     var getBody = function(req, options) {
-      return tslib_1.__awaiter(void 0, void 0, void 0, function() {
+      return (0, tslib_1.__awaiter)(void 0, void 0, void 0, function() {
         var type, body;
-        return tslib_1.__generator(this, function(_a) {
+        return (0, tslib_1.__generator)(this, function(_a) {
           switch (_a.label) {
             case 0:
-              type = exports2.isJsonType(req);
+              type = (0, exports2.isJsonType)(req);
               if (!type)
                 return [3, 2];
-              return [4, exports2.parseBody(req, options)];
+              return [4, (0, exports2.parseBody)(req, options)];
             case 1:
               body = _a.sent();
               return [2, body];
@@ -5242,7 +5242,7 @@ var require_server = __commonJS({
     exports2.getBody = getBody;
     var handleBasenames = function(basenames, requestInfo) {
       var _a = findBasename(basenames, requestInfo.pathname), basename = _a.basename, pathname = _a.pathname;
-      var newRequestInfo = tslib_1.__assign(tslib_1.__assign({}, requestInfo), { pathname });
+      var newRequestInfo = (0, tslib_1.__assign)((0, tslib_1.__assign)({}, requestInfo), { pathname });
       return {
         basename,
         requestInfo: newRequestInfo
@@ -5252,7 +5252,7 @@ var require_server = __commonJS({
     var findBasename = function(basenames, pathname) {
       var e_1, _a;
       try {
-        for (var basenames_1 = tslib_1.__values(basenames), basenames_1_1 = basenames_1.next(); !basenames_1_1.done; basenames_1_1 = basenames_1.next()) {
+        for (var basenames_1 = (0, tslib_1.__values)(basenames), basenames_1_1 = basenames_1.next(); !basenames_1_1.done; basenames_1_1 = basenames_1.next()) {
           var basename = basenames_1_1.value;
           if (!pathname.startsWith(basename))
             continue;
@@ -5346,9 +5346,9 @@ var require_server = __commonJS({
       if (options === void 0) {
         options = {};
       }
-      return tslib_1.__awaiter(void 0, void 0, void 0, function() {
+      return (0, tslib_1.__awaiter)(void 0, void 0, void 0, function() {
         var parse, len, encoding, strict, str;
-        return tslib_1.__generator(this, function(_a) {
+        return (0, tslib_1.__generator)(this, function(_a) {
           switch (_a.label) {
             case 0:
               parse = function(str2) {
@@ -5367,7 +5367,7 @@ var require_server = __commonJS({
                 options.length = ~~len;
               options.limit = options.limit || "1mb";
               strict = options.strict !== false;
-              return [4, raw_body_1.default(inflation_1.default(req), tslib_1.__assign(tslib_1.__assign({}, options), { encoding: "utf8" }))];
+              return [4, (0, raw_body_1.default)((0, inflation_1.default)(req), (0, tslib_1.__assign)((0, tslib_1.__assign)({}, options), { encoding: "utf8" }))];
             case 1:
               str = _a.sent();
               try {
@@ -5767,9 +5767,9 @@ var require_service = __commonJS({
     };
     exports2.UnmatchedError = UnmatchedError;
     var createMatcher = function(routes) {
-      return tslib_1.__awaiter(void 0, void 0, void 0, function() {
+      return (0, tslib_1.__awaiter)(void 0, void 0, void 0, function() {
         var finalRoutes, routeLength, matcher;
-        return tslib_1.__generator(this, function(_a) {
+        return (0, tslib_1.__generator)(this, function(_a) {
           switch (_a.label) {
             case 0:
               return [4, Promise.all(routes.map(exports2.createRoute))];
@@ -5795,11 +5795,11 @@ var require_service = __commonJS({
     };
     exports2.createMatcher = createMatcher;
     var createRoute = function(route) {
-      return tslib_1.__awaiter(void 0, void 0, void 0, function() {
+      return (0, tslib_1.__awaiter)(void 0, void 0, void 0, function() {
         var finalRoute, matcher, intactRoute;
-        return tslib_1.__generator(this, function(_a) {
+        return (0, tslib_1.__generator)(this, function(_a) {
           finalRoute = Object.assign({}, route);
-          matcher = path_to_regexp_1.match(finalRoute.path);
+          matcher = (0, path_to_regexp_1.match)(finalRoute.path);
           intactRoute = Object.assign(route, { matcher });
           return [2, intactRoute];
         });
@@ -5823,7 +5823,7 @@ var require_mountMiddlewares = __commonJS({
     var mountMiddlewares = function(routes, providerConfigs) {
       var e_1, _a, e_2, _b, e_3, _c, e_4, _d;
       try {
-        for (var providerConfigs_1 = tslib_1.__values(providerConfigs), providerConfigs_1_1 = providerConfigs_1.next(); !providerConfigs_1_1.done; providerConfigs_1_1 = providerConfigs_1.next()) {
+        for (var providerConfigs_1 = (0, tslib_1.__values)(providerConfigs), providerConfigs_1_1 = providerConfigs_1.next(); !providerConfigs_1_1.done; providerConfigs_1_1 = providerConfigs_1.next()) {
           var providerConfig = providerConfigs_1_1.value;
           var options = providerConfig.options, Provider = providerConfig.Provider;
           var middleware = Provider(options);
@@ -5846,7 +5846,7 @@ var require_mountMiddlewares = __commonJS({
               }
             };
             try {
-              for (var routes_1 = (e_2 = void 0, tslib_1.__values(routes)), routes_1_1 = routes_1.next(); !routes_1_1.done; routes_1_1 = routes_1.next()) {
+              for (var routes_1 = (e_2 = void 0, (0, tslib_1.__values)(routes)), routes_1_1 = routes_1.next(); !routes_1_1.done; routes_1_1 = routes_1.next()) {
                 var route = routes_1_1.value;
                 _loop_1(route);
               }
@@ -5880,7 +5880,7 @@ var require_mountMiddlewares = __commonJS({
               }
             };
             try {
-              for (var routes_2 = (e_3 = void 0, tslib_1.__values(routes)), routes_2_1 = routes_2.next(); !routes_2_1.done; routes_2_1 = routes_2.next()) {
+              for (var routes_2 = (e_3 = void 0, (0, tslib_1.__values)(routes)), routes_2_1 = routes_2.next(); !routes_2_1.done; routes_2_1 = routes_2.next()) {
                 var route = routes_2_1.value;
                 _loop_2(route);
               }
@@ -5897,7 +5897,7 @@ var require_mountMiddlewares = __commonJS({
             }
           } else {
             try {
-              for (var routes_3 = (e_4 = void 0, tslib_1.__values(routes)), routes_3_1 = routes_3.next(); !routes_3_1.done; routes_3_1 = routes_3.next()) {
+              for (var routes_3 = (e_4 = void 0, (0, tslib_1.__values)(routes)), routes_3_1 = routes_3.next(); !routes_3_1.done; routes_3_1 = routes_3.next()) {
                 var route = routes_3_1.value;
                 route.func.use(middleware);
               }
@@ -7358,9 +7358,9 @@ var require_function = __commonJS({
       return message2;
     };
     var createFunc2 = function(definition, func) {
-      var validateApiInput = validator_1.createSchemaValidator(farrow_schema_1.toSchemaCtor(definition.input));
-      var validateApiOutput = validator_1.createSchemaValidator(farrow_schema_1.toSchemaCtor(definition.output));
-      var apiPipeline = farrow_pipeline_1.createAsyncPipeline();
+      var validateApiInput = (0, validator_1.createSchemaValidator)((0, farrow_schema_1.toSchemaCtor)(definition.input));
+      var validateApiOutput = (0, validator_1.createSchemaValidator)((0, farrow_schema_1.toSchemaCtor)(definition.output));
+      var apiPipeline = (0, farrow_pipeline_1.createAsyncPipeline)();
       var apiSchema = {
         type: "Api",
         definition
@@ -7370,9 +7370,9 @@ var require_function = __commonJS({
         return apiPipeline.run(input, {
           container,
           onLast: function(input2) {
-            return tslib_1.__awaiter(void 0, void 0, void 0, function() {
+            return (0, tslib_1.__awaiter)(void 0, void 0, void 0, function() {
               var inputResult, output, outputResult;
-              return tslib_1.__generator(this, function(_a) {
+              return (0, tslib_1.__generator)(this, function(_a) {
                 switch (_a.label) {
                   case 0:
                     inputResult = validateApiInput(input2);
@@ -7386,7 +7386,7 @@ var require_function = __commonJS({
                     if (outputResult.isErr) {
                       return [2, OutputValidationError(getErrorMessage(outputResult.value))];
                     }
-                    return [2, exports2.HandleSuccess(output)];
+                    return [2, (0, exports2.HandleSuccess)(output)];
                 }
               });
             });
@@ -7395,7 +7395,7 @@ var require_function = __commonJS({
       };
       var apiMethods = {
         new: function() {
-          return exports2.createFunc(definition, func);
+          return (0, exports2.createFunc)(definition, func);
         }
       };
       return Object.assign(apiImpl, apiSchema, apiPipeline, apiMethods);
@@ -7403,7 +7403,7 @@ var require_function = __commonJS({
     exports2.createFunc = createFunc2;
     var useContainerSafe = function() {
       try {
-        return farrow_pipeline_1.useContainer();
+        return (0, farrow_pipeline_1.useContainer)();
       } catch (_) {
       }
     };
@@ -7412,7 +7412,7 @@ var require_function = __commonJS({
     };
     exports2.createRoutes = createRoutes2;
     var isFunc = function(input) {
-      return farrow_api_1.isApi(input);
+      return (0, farrow_api_1.isApi)(input);
     };
     exports2.isFunc = isFunc;
   }
@@ -7505,7 +7505,7 @@ var require_middleware = __commonJS({
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.isFuncMiddlewaresLoader = exports2.defineMiddlewares = void 0;
     var asyncHooks_node_1 = require_asyncHooks_node();
-    asyncHooks_node_1.enable();
+    (0, asyncHooks_node_1.enable)();
     var defineMiddlewares = function(list) {
       var _a;
       return Object.assign(list, (_a = {}, _a[FUNC_PROVIDERS_LOADER] = true, _a));
@@ -7526,11 +7526,11 @@ var require_runtime = __commonJS({
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var tslib_1 = require_tslib();
-    tslib_1.__exportStar(require_dist2(), exports2);
-    tslib_1.__exportStar(require_dist4(), exports2);
-    tslib_1.__exportStar(require_dist3(), exports2);
-    tslib_1.__exportStar(require_function(), exports2);
-    tslib_1.__exportStar(require_middleware(), exports2);
+    (0, tslib_1.__exportStar)(require_dist2(), exports2);
+    (0, tslib_1.__exportStar)(require_dist4(), exports2);
+    (0, tslib_1.__exportStar)(require_dist3(), exports2);
+    (0, tslib_1.__exportStar)(require_function(), exports2);
+    (0, tslib_1.__exportStar)(require_middleware(), exports2);
   }
 });
 
@@ -7544,16 +7544,16 @@ var require_routes = __commonJS({
     var tslib_1 = require_tslib();
     var runtime_1 = require_runtime();
     var createRoute = function(route) {
-      return tslib_1.__awaiter(void 0, void 0, void 0, function() {
+      return (0, tslib_1.__awaiter)(void 0, void 0, void 0, function() {
         var finalRoute, _a, _b, _c;
         var _d;
-        return tslib_1.__generator(this, function(_e) {
+        return (0, tslib_1.__generator)(this, function(_e) {
           switch (_e.label) {
             case 0:
               _b = (_a = Object).assign;
               _c = [route];
               _d = {};
-              return [4, exports2.loadFunc(route.func)];
+              return [4, (0, exports2.loadFunc)(route.func)];
             case 1:
               finalRoute = _b.apply(_a, _c.concat([(_d.func = _e.sent(), _d)]));
               return [2, finalRoute];
@@ -7563,9 +7563,9 @@ var require_routes = __commonJS({
     };
     exports2.createRoute = createRoute;
     var loadFunc = function(module3) {
-      return tslib_1.__awaiter(void 0, void 0, void 0, function() {
-        return tslib_1.__generator(this, function(_a) {
-          if (runtime_1.isFunc(module3)) {
+      return (0, tslib_1.__awaiter)(void 0, void 0, void 0, function() {
+        return (0, tslib_1.__generator)(this, function(_a) {
+          if ((0, runtime_1.isFunc)(module3)) {
             return [2, module3];
           }
           return [2, module3().then(function(module4) {
@@ -7594,33 +7594,33 @@ var require_starter = __commonJS({
       if (options === void 0) {
         options = {};
       }
-      return tslib_1.__awaiter(void 0, void 0, void 0, function() {
+      return (0, tslib_1.__awaiter)(void 0, void 0, void 0, function() {
         var finalRoutes, matcher, providerConfigs, server;
-        return tslib_1.__generator(this, function(_a) {
+        return (0, tslib_1.__generator)(this, function(_a) {
           switch (_a.label) {
             case 0:
               return [4, Promise.all(routes.map(routes_1.createRoute))];
             case 1:
               finalRoutes = _a.sent();
-              return [4, service_1.createMatcher(finalRoutes)];
+              return [4, (0, service_1.createMatcher)(finalRoutes)];
             case 2:
               matcher = _a.sent();
               if (options.loadProviderConfigs) {
                 providerConfigs = options.loadProviderConfigs();
-                mountMiddlewares_1.mountMiddlewares(finalRoutes, providerConfigs);
+                (0, mountMiddlewares_1.mountMiddlewares)(finalRoutes, providerConfigs);
               }
-              server = server_1.createHttpServer(function(req, res) {
-                return tslib_1.__awaiter(void 0, void 0, void 0, function() {
+              server = (0, server_1.createHttpServer)(function(req, res) {
+                return (0, tslib_1.__awaiter)(void 0, void 0, void 0, function() {
                   var url, _a2, _b, pathname, handleInput, body, _c;
                   var _d;
-                  return tslib_1.__generator(this, function(_e) {
+                  return (0, tslib_1.__generator)(this, function(_e) {
                     switch (_e.label) {
                       case 0:
                         if (typeof req.url !== "string") {
                           throw new Error("req.url is not existed");
                         }
                         url = req.url;
-                        _a2 = tslib_1.__read(url.split("?"), 1), _b = _a2[0], pathname = _b === void 0 ? "/" : _b;
+                        _a2 = (0, tslib_1.__read)(url.split("?"), 1), _b = _a2[0], pathname = _b === void 0 ? "/" : _b;
                         handleInput = matcher(pathname);
                         if (!handleInput)
                           return [3, 4];
@@ -7629,7 +7629,7 @@ var require_starter = __commonJS({
                         _c = _d;
                         return [3, 3];
                       case 1:
-                        return [4, server_1.getBody(req)];
+                        return [4, (0, server_1.getBody)(req)];
                       case 2:
                         _c = _e.sent();
                         _e.label = 3;
@@ -7637,7 +7637,7 @@ var require_starter = __commonJS({
                         body = _c;
                         return [2, handleInput(body)];
                       case 4:
-                        return [2, service_1.UnmatchedError(req.url)];
+                        return [2, (0, service_1.UnmatchedError)(req.url)];
                     }
                   });
                 });
@@ -7666,7 +7666,7 @@ var require_starter2 = __commonJS({
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var tslib_1 = require_tslib();
-    tslib_1.__exportStar(require_starter(), exports2);
+    (0, tslib_1.__exportStar)(require_starter(), exports2);
   }
 });
 
@@ -7692,20 +7692,20 @@ var require_shim = __commonJS({
     var main = function() {
       Promise.all([
         Promise.resolve().then(function() {
-          return tslib_1.__importStar((init_routes(), exports));
+          return (0, tslib_1.__importStar)((init_routes(), exports));
         }),
         "" ? Promise.resolve().then(function() {
-          return tslib_1.__importStar(null);
+          return (0, tslib_1.__importStar)(null);
         }) : void 0
       ]).then(function(_a) {
-        var _b = tslib_1.__read(_a, 2), routes = _b[0], load = _b[1];
+        var _b = (0, tslib_1.__read)(_a, 2), routes = _b[0], load = _b[1];
         return [
           loadModule(routes),
           load ? loadModule(load) : void 0
         ];
       }).then(function(_a) {
-        var _b = tslib_1.__read(_a, 2), routes = _b[0], load = _b[1];
-        starter_1.start(routes, {
+        var _b = (0, tslib_1.__read)(_a, 2), routes = _b[0], load = _b[1];
+        (0, starter_1.start)(routes, {
           port: undefined || process.env.PORT || DEFAULT_PORT,
           loadMiddlewares: load
         });
@@ -7722,7 +7722,7 @@ var require_dist5 = __commonJS({
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var tslib_1 = require_tslib();
-    tslib_1.__exportStar(require_runtime(), exports2);
+    (0, tslib_1.__exportStar)(require_runtime(), exports2);
   }
 });
 
