@@ -5,10 +5,10 @@
   "license": "MIT",
   "scripts": {
     "dev": "farrow-faas dev",
-    "bundle": "farrow-faas bundle --output dist",
-    "server": "node ./dist/routes.js",
+    "bundle": "farrow-faas bundle --output index.js",
+    "server": "PORT=3000 node index.js",
     "bench": "branchcmp -r 2 -g -s \"npm run benchmark\"",
-    "benchmark": "npx concurrently -k -s first \"node ./dist/routes.js\" \"npx autocannon -c 100 -d 30 -p 10 localhost:3000/\""
+    "benchmark": "npx concurrently -k -s first \"PORT=3000 node index.js\" \"npx autocannon -c 100 -d 30 -p 10 localhost:3000/\""
   },
   "dependencies": {
     "farrow-faas": "^0.1.12"
